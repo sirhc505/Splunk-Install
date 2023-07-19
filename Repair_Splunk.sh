@@ -7,6 +7,9 @@
 #       - Created by chris at uconn dot edu 11-20-2020                    #
 #       - Updated for RHEL 9 by chris at uconn dot edu 07-12-2023         #  
 ###########################################################################
+# This script assumes you have published the Splunk Forwarder RPM in your #
+# Satellite instance.                                                     #
+###########################################################################
 DEV_MODE="TRUE"
 
 if [ "$DEV_MODE" == "TRUE" ] ; then
