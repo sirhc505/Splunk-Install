@@ -7,9 +7,6 @@
 #       - Created by chris at uconn dot edu 11-20-2020                    #
 #       - Updated for RHEL 9 by chris at uconn dot edu 07-12-2023         #  
 ###########################################################################
-# This script assumes you have published the Splunk Forwarder RPM in your #
-# Satellite instance.                                                     #
-###########################################################################
 DEV_MODE="TRUE"
 
 if [ "$DEV_MODE" == "TRUE" ] ; then
@@ -44,6 +41,11 @@ SPLUNK_REV=`echo $SPLUNK_VERSION | awk ' { print $1 } ' | cut -f 1 -d\ `
 YUM_VERSION=`dnf list splunkforwarder |tail -n 1 |awk ' { print $2 } ' |cut -f1 -d\-`
 MIN_SPLUNK_VERSION="9"
 SYSTEM_RAM=`free -g | grep Mem | awk '{ print $2 }'`
+DEPLOYMENT_SERVER_FQDN="deploy.splunk.uconn.edu"
+DEPLOYMENT_SERVER_PORT="8089"
+DEPLOYMENT_SERVER="$DEPLOYMENT_SERVER_FQDN:$DEPLOYMENT_SERVER_PORT"
+DEPLOY_SVR_TEST=`grep deploy.splunk.uconn.edu /opt/splunkforwarder/etc/system/local/deploymentclient.conf|awk '{ print $3 }'`
+
 
 # KVSTORE Vars
 SPLUNK_SVR_CONF="/opt/splunkforwarder/etc/system/local/server.conf"
@@ -191,6 +193,19 @@ pre_flight_check () {
         echo "* The Splunk Universal Forwarder does not appear to be installed *" >> $TMP_MESSAGE_FILE
         echo "******************************************************************" >> $TMP_MESSAGE_FILE
         dnf -y install splunkforwarder
+        #################################################################
+        # Set the configuration for the deployment server so the client #
+        # will actually start logging to the Splunk indexers            #
+        #################################################################
+        if [ "$DEPLOY_SVR_TEST" == "deploy.splunk.uconn.edu:8089" ] ; then
+            echo "Deployment server properly set!"
+        else
+            echo "Setting Deployment Server"
+            echo "[deployment-client]
+[target-broker:deploymentServer]
+targetUri = $DEPLOYMENT_SERVER" > /opt/splunkforwarder/etc/system/local/deploymentclient.conf
+        fi
+
         echo "Universal Forwarder now installed"
         exit 1
     fi
