@@ -1,0 +1,54 @@
+# Install Splunk RPM
+
+##########################################################
+# Make sure the directory exists to place the upgrade
+##########################################################
+- name: mkdir {{ role_path }}
+  file:
+    path: {{ role_path }}
+    state: directory
+
+##########################################################
+# Since Splunk upgrades are a regular occurrence we are
+# going to want to make sure that there are no files in 
+# the directory from previous upgrades
+##########################################################
+- name: Locating all files in files dir
+  find:
+    path: "{{ role_path }}/files"
+  register: cleanup
+  ignore_errors: true
+
+- name: Removing all files previously found in files dir
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  with_items: "{{ cleanup.files }}"
+  ignore_errors: true
+
+##########################################################
+# Copy the file over to the server and run the install
+# please make sure you have copied the latest version into
+# the roles/upgrade/files directory.
+##########################################################
+- name: copy RPMs to {{ role_path }}
+  copy:
+    src: "{{ item }}"
+    dest: {{ role_path }}
+  with_fileglob:
+    - "../files/*.rpm"
+  register: rpms_copied
+
+- name: local RPMs not found
+  fail:
+    msg: "RPMs not found in ../files/"
+  when: rpms_copied.results|length == 0 and rpms_copied.skipped and rpms_copied.skipped_reason.find('No items') != -1
+
+- set_fact:
+    rpm_list: "{{ rpms_copied.results | map(attribute='dest') | list}}"
+
+- name: install Splunk RPM
+  yum:
+    name: "{{rpm_list}}"
+
+# - name: Activate Splunk Installation

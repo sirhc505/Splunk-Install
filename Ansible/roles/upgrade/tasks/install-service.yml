@@ -1,0 +1,53 @@
+# Install Service File
+
+##########################################################
+# Just in case there are multiple versions of the service
+# file installed we are going to want to make sure that
+# they get cleaned up here. 
+##########################################################
+- name: Run Service CleanUp
+  ansible.builtin.script: ../files/splunk-service-cleanup.sh
+  args:
+    executable: bash
+
+##########################################################
+# The service file needs to have a max RAM usage value
+# set. I don't see an instance where a full version of 
+# Splunk is installed on a system with 4GB of RAM but I 
+# do want to account for it.
+##########################################################
+- name: Get System RAM
+  set_fact:
+    SYSTEM_MEMORY: "{{ ansible_memfree_mb }}"
+    SERVICE_MEMORY: "{{ SYSTEM_MEMORY }}"
+
+##########################################################
+# So long as there is at least a proper amount of RAM on
+# on the system we are going to tell the Splunk service
+# that is can use all but 2GB of it. Leaving the rest for
+# system services. 
+##########################################################
+- name: Reduce for MAX Service Usage
+  set_fact:
+    SERVICE_MEMORY: "{{ SYSTEM_MEMORY-2048|int }}"
+  when: SERVICE_MEMORY > {{ MIN_MEMORY_USAGE }}
+
+##########################################################
+# Here we are going to install our version of the service
+# file and make sure that 
+##########################################################
+- name: Install the Service File
+  ansible.builtin.template:
+    src: Splunkd.service.j2
+    dest: /etc/systemd/system/Splunkd.servuce
+
+- name: Start the Splunk service
+  ansible.builtin.service:
+    name: Splunkd
+    state: started
+    daemon_reload: true
+  register: splunkd_status
+
+- debug:
+    var: splunkd_status
+

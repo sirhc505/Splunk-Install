@@ -1,0 +1,12 @@
+# Shutdown Splunk Services
+
+- name: Check if Splunkd service exist
+  shell: service Splunkd status 
+  register: Splunkd_status
+  failed_when: not(Splunkd_status.rc == 3 or Splunkd_status.rc == 0)
+
+- name: Check if Splunkd service exist
+  service:
+    name: Splunkd
+    state: stopped 
+  when: Splunkd_status.rc == 0

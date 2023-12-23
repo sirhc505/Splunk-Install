@@ -118,16 +118,14 @@ else
 fi
 
 ###################################################################################
-# Splunk has decided to change the values of how services will be run we will set #
-# the new values here.                                                            #
 # MAX_SINGLE_THREAD_PERC set the max possible system usage for a single thread.   #
 #                        This will not mean that a cpu won't get pegged but as an #
 #                        aggregate, the total system usage will never be 100%     #
 ###################################################################################
-MAX_SINGLE_THREAD_PERC="80"
-CURRENT_CPU_COUNT=`cat /proc/cpuinfo |grep processor|wc -l | awk ' { print $1 } '`
-let CPU_WEIGHT=$CURRENT_CPU_COUNT*$MAX_SINGLE_THREAD_PERC
-
+# MAX_SINGLE_THREAD_PERC="80"
+# CURRENT_CPU_COUNT=`cat /proc/cpuinfo |grep processor|wc -l | awk ' { print $1 } '`
+# let CPU_WEIGHT=$CURRENT_CPU_COUNT*$MAX_SINGLE_THREAD_PERC
+CPU_WEIGHT=1024
 
 ###################################################################################
 # Additionally I have found that the systemd file that is created by Splunk is    #

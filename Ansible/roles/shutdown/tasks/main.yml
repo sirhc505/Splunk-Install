@@ -1,0 +1,3 @@
+# stop tasks
+
+- include_tasks: stop-splunk.yml

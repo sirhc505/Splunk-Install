@@ -1,0 +1,5 @@
+# upgrade tasks
+
+- include_tasks: install-splunk.yml
+
+- include_tasks: install-service.yml

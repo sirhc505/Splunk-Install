@@ -1,0 +1,5 @@
+role_path: "/tmp/SPLUNK_UPG"
+
+MIN_MEMORY_USAGE: 4096
+
+CPU_WEIGHT: 1024
