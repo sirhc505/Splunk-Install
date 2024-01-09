@@ -2,7 +2,7 @@
 
 ## Ansible
 
-This contains the Ansible script that I use to upgrade the infrastructure
+This contains the Ansible script that I use to upgrade the infrastructure. It is not yet finished so use at your own risk.
 
 ## Splunk UF Installer
 
