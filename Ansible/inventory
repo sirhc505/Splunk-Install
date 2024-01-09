@@ -1,49 +1,49 @@
 [cloud-heavy-forwarders]
-splunk-arm-hf0.grove.ad.uconn.edu
-splunk-arm-hf1.grove.ad.uconn.edu
+splunk-arm-hf0.ad.mycompany.com
+splunk-arm-hf1.ad.mycompany.com
 
 [cloud-indexers]
-splunk-arm-idx0.grove.ad.uconn.edu
-splunk-arm-idx1.grove.ad.uconn.edu
-splunk-arm-idx2.grove.ad.uconn.edu
+splunk-arm-idx0.ad.mycompany.com
+splunk-arm-idx1.ad.mycompany.com
+splunk-arm-idx2.ad.mycompany.com
 
 [cloud-searchheads]
-splunk-arm-sh0.grove.ad.uconn.edu
-splunk-arm-sh1.grove.ad.uconn.edu
+splunk-arm-sh0.ad.mycompany.com
+splunk-arm-sh1.ad.mycompany.com
 
 [cloud-deployment]
-splunk-deploy1.grove.ad.uconn.edu
+splunk-deploy1.ad.mycompany.com
 
 [cloud-clustermaster]
-splunk-cluster1.grove.ad.uconn.edu
+splunk-cluster1.ad.mycompany.com
 
 [onprem-heavy-forwarders]
-splunk-msb-hf0.grove.ad.uconn.edu
-splunk-msb-hf1.grove.ad.uconn.edu
-splunk-msb-hf2.grove.ad.uconn.edu
-splunk-hbl-hf0.grove.ad.uconn.edu
-splunk-hbl-hf1.grove.ad.uconn.edu
+splunk-msb-hf0.ad.mycompany.com
+splunk-msb-hf1.ad.mycompany.com
+splunk-msb-hf2.ad.mycompany.com
+splunk-hbl-hf0.ad.mycompany.com
+splunk-hbl-hf1.ad.mycompany.com
 
 [onprem-indexers]
-splunk-msb-idx0.grove.ad.uconn.edu
-splunk-msb-idx1.grove.ad.uconn.edu
-splunk-msb-idx2.grove.ad.uconn.edu
-splunk-msb-idx3.grove.ad.uconn.edu
-splunk-hbl-idx0.grove.ad.uconn.edu
-splunk-hbl-idx1.grove.ad.uconn.edu
-splunk-hbl-idx2.grove.ad.uconn.edu
-splunk-hbl-idx3.grove.ad.uconn.edu
+splunk-msb-idx0.ad.mycompany.com
+splunk-msb-idx1.ad.mycompany.com
+splunk-msb-idx2.ad.mycompany.com
+splunk-msb-idx3.ad.mycompany.com
+splunk-hbl-idx0.ad.mycompany.com
+splunk-hbl-idx1.ad.mycompany.com
+splunk-hbl-idx2.ad.mycompany.com
+splunk-hbl-idx3.ad.mycompany.com
 
 [onprem-searchheads]
-splunk-msb-sh0.grove.ad.uconn.edu
-splunk-msb-sh1.grove.ad.uconn.edu
-splunk-hbl-sh0.grove.ad.uconn.edu
+splunk-msb-sh0.ad.mycompany.com
+splunk-msb-sh1.ad.mycompany.com
+splunk-hbl-sh0.ad.mycompany.com
 
 [onprem-deployment]
-splunk-deploy0.grove.ad.uconn.edu
+splunk-deploy0.ad.mycompany.com
 
 [onprem-clustermaster]
-splunk-cluster0.grove.ad.uconn.edu
+
 
 
 
