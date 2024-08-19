@@ -23,13 +23,13 @@
 DEPLOYMENT_SERVER_FQDN="deploy.splunk.uconn.edu"
 DEPLOYMENT_SERVER_PORT="8089"
 DEPLOYMENT_SERVER="$DEPLOYMENT_SERVER_FQDN:$DEPLOYMENT_SERVER_PORT"
-DEPLOY_SVR_TEST=`grep deploy.splunk.uconn.edu /opt/splunkforwarder/etc/system/local/deploymentclient.conf|awk '{ print $3 }'`
+DEPLOY_SVR_TEST=`grep $DEPLOYMENT_SERVER_FQDN /opt/splunkforwarder/etc/system/local/deploymentclient.conf|awk '{ print $3 }'`
 
 SPLUNK_SERVICE_FILE="splunk.service"
 
 SYSTEM_RAM=`free -g | grep Mem | awk '{ print $2 }'`
 KVSTORE_STATUS=`grep kvstore /opt/splunkforwarder/etc/system/local/server.conf`
-DEPLOY_SVR_TEST=`grep deploy.splunk.uconn.edu /opt/splunkforwarder/etc/system/local/deploymentclient.conf|awk '{ print $3 }'`
+DEPLOY_SVR_TEST=`grep $DEPLOYMENT_SERVER_FQDN /opt/splunkforwarder/etc/system/local/deploymentclient.conf|awk '{ print $3 }'`
 
 if [ "$DEPLOYMENT_SERVER_FQDN" == "" ] ; then
     echo "Please set value for DEPLOYMENT_SERVER_FQDN"
